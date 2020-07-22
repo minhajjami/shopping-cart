@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5 id="subtotal">$1,278</h5>
+                        <h5 id="tax">$0</h5>
+                        <h5 id="total">$1,278</h5>
                      </div>
                   </div>
                </div>
@@ -79,17 +79,57 @@
    </section>
 
    <script>
+         //add button event handler
          const addBtn = document.getElementById('btn-add');
          addBtn.addEventListener('click',function(){
             const qty = document.getElementById('quantity').value;
             let numberOfQty=parseInt(qty);
             document.getElementById('quantity').value=numberOfQty+1;  
 
-            //phone price
+            //phone price update
             let phonePrice=1219;
-            document.getElementById('phone-price').innerText=phonePrice*(numberOfQty+1);
+            phonePrice=document.getElementById('phone-price').innerText=phonePrice*(numberOfQty+1);
+
+            //sub total and total price update
+
+            const subTotal=document.getElementById('subtotal');
+            subTotal.innerText=phonePrice;
+
+            // const tax=document.getElementById('tax').innerText;
+            // const taxValue=parseFloat(tax);
+
+            const taxValue=0;
+
+            const totalAmount=document.getElementById('total');
+            let totalValue=parseFloat(totalAmount);
+            totalValue=phonePrice+taxValue;
+
+            document.getElementById('total').innerText=totalValue;
             
-         })
+         });
+
+         //minus Button Event Handler
+
+         const minusBtn=document.getElementById('btn-minus');
+         minusBtn.addEventListener('click',function(){
+
+         let qtyForMinus = document.getElementById('quantity').value;
+         let numberOfQtyForMinus=parseFloat(qtyForMinus);
+         document.getElementById('quantity').value=numberOfQtyForMinus-1;  
+
+         let minusPrice=1219;
+         let price=document.getElementById('phone-price').innerText=minusPrice*(numberOfQtyForMinus-1);
+         
+         const subTotal=document.getElementById('subtotal').innerText;
+         let subTotalValue=parseFloat(subTotal);
+         
+         document.getElementById('subtotal').innerText=subTotalValue-minusPrice;
+         document.getElementById('total').innerText=subTotalValue-minusPrice;
+
+         
+
+         });
+
    </script>
 </body>
 </html>
